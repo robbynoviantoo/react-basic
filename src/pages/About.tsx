@@ -1,6 +1,12 @@
+import { useEffect } from "react";
+
 const About = () => {
+    useEffect(() => {
+      document.title = "About";
+    }, []);
+  
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-[3000px] flex items-center justify-center">
       <h1 className="text-4xl font-bold">About Us</h1>
     </div>
   )

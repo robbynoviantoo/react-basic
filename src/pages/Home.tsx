@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react"
-import { useQuery } from "@tanstack/react-query"
+import { useEffect, useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import {
   flexRender,
   getCoreRowModel,
@@ -7,7 +7,7 @@ import {
   useReactTable,
   type ColumnDef,
   type PaginationState,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 import {
   Pagination,
@@ -16,7 +16,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 import {
   Table,
   TableBody,
@@ -24,35 +24,39 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
 type User = {
-  id: number
-  name: string
-  username: string
-  email: string
-  phone: string
-  website: string
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
   company: {
-    name: string
-  }
-}
+    name: string;
+  };
+};
 
 const getUsers = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users")
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
   if (!response.ok) {
-    throw new Error("Gagal mengambil data user")
+    throw new Error("Gagal mengambil data user");
   }
 
-  return response.json() as Promise<User[]>
-}
+  return response.json() as Promise<User[]>;
+};
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Home";
+  }, []);
+
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5,
-  })
+  });
 
   const {
     data: users = [],
@@ -62,7 +66,7 @@ const Home = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
-  })
+  });
 
   const columns = useMemo<ColumnDef<User>[]>(
     () => [
@@ -102,8 +106,8 @@ const Home = () => {
         ),
       },
     ],
-    []
-  )
+    [],
+  );
 
   const table = useReactTable({
     data: users,
@@ -114,7 +118,7 @@ const Home = () => {
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-  })
+  });
 
   return (
     <main className="min-h-screen bg-muted/30 px-4 py-10">
@@ -156,7 +160,7 @@ const Home = () => {
                           ? null
                           : flexRender(
                               header.column.columnDef.header,
-                              header.getContext()
+                              header.getContext(),
                             )}
                       </TableHead>
                     ))}
@@ -170,7 +174,10 @@ const Home = () => {
                     <TableRow key={row.id}>
                       {row.getVisibleCells().map((cell) => (
                         <TableCell key={cell.id}>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
                         </TableCell>
                       ))}
                     </TableRow>
@@ -207,7 +214,7 @@ const Home = () => {
                   <select
                     value={table.getState().pagination.pageSize}
                     onChange={(event) => {
-                      table.setPageSize(Number(event.target.value))
+                      table.setPageSize(Number(event.target.value));
                     }}
                     className="h-8 rounded-md border bg-background px-2 text-foreground"
                   >
@@ -231,26 +238,30 @@ const Home = () => {
                             : undefined
                         }
                         onClick={(event) => {
-                          event.preventDefault()
-                          table.previousPage()
+                          event.preventDefault();
+                          table.previousPage();
                         }}
                       />
                     </PaginationItem>
 
-                    {Array.from({ length: table.getPageCount() }).map((_, index) => (
-                      <PaginationItem key={index}>
-                        <PaginationLink
-                          href="#"
-                          isActive={index === table.getState().pagination.pageIndex}
-                          onClick={(event) => {
-                            event.preventDefault()
-                            table.setPageIndex(index)
-                          }}
-                        >
-                          {index + 1}
-                        </PaginationLink>
-                      </PaginationItem>
-                    ))}
+                    {Array.from({ length: table.getPageCount() }).map(
+                      (_, index) => (
+                        <PaginationItem key={index}>
+                          <PaginationLink
+                            href="#"
+                            isActive={
+                              index === table.getState().pagination.pageIndex
+                            }
+                            onClick={(event) => {
+                              event.preventDefault();
+                              table.setPageIndex(index);
+                            }}
+                          >
+                            {index + 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ),
+                    )}
 
                     <PaginationItem>
                       <PaginationNext
@@ -262,8 +273,8 @@ const Home = () => {
                             : undefined
                         }
                         onClick={(event) => {
-                          event.preventDefault()
-                          table.nextPage()
+                          event.preventDefault();
+                          table.nextPage();
                         }}
                       />
                     </PaginationItem>
@@ -274,9 +285,8 @@ const Home = () => {
           </>
         )}
       </section>
-
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
