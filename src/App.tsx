@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Lenis from "lenis";
 import Mcs from "./pages/mcs/Mcs";
 import McsDetail from "./pages/mcs/McsDetail";
+import Products from "./pages/products/Products";
 
 function App() {
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/mcs" element={<Mcs />} />
         <Route path="/mcs/:id" element={<McsDetail />} />
       </Routes>
