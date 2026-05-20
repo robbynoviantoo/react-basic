@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
   type ColumnDef,
@@ -17,6 +18,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+
 import {
   Table,
   TableBody,
@@ -25,6 +27,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import { SearchIcon } from "lucide-react";
 
 type User = {
   id: number;
@@ -57,6 +66,7 @@ const Home = () => {
     pageIndex: 0,
     pageSize: 5,
   });
+  const [globalFilter, setGlobalFilter] = useState("");
 
   const {
     data: users = [],
@@ -114,9 +124,12 @@ const Home = () => {
     columns,
     state: {
       pagination,
+      globalFilter,
     },
     onPaginationChange: setPagination,
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
 
@@ -138,6 +151,21 @@ const Home = () => {
               Sedang refresh data di background...
             </p>
           ) : null}
+        </div>
+        <div className="flex justify-end">
+          <InputGroup className="mb-4 max-w-sm">
+            <InputGroupInput
+              value={globalFilter}
+              onChange={(event) => {
+                setGlobalFilter(event.target.value);
+                table.setPageIndex(0);
+              }}
+              placeholder="Search..."
+            />
+            <InputGroupAddon>
+              <SearchIcon />
+            </InputGroupAddon>
+          </InputGroup>
         </div>
 
         {isLoading ? (
@@ -203,7 +231,7 @@ const Home = () => {
                 </span>{" "}
                 dari{" "}
                 <span className="font-medium text-foreground">
-                  {users.length}
+                  {table.getFilteredRowModel().rows.length}
                 </span>{" "}
                 data
               </p>

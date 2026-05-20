@@ -19,15 +19,12 @@ const Navbar = () => {
           shouldShowNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className=" max-w-7xl p-4 md:p-0 mx-auto h-full">
+        <div className="max-w-9/10 p-4 md:p-0 mx-auto h-full">
           <div className="flex items-center h-full">
             <h1 className="text-xl font-bold">My App</h1>
             <div className="ml-auto flex items-center gap-4">
               <NavbarLinks />
-              <NavbarThemeToggle
-                isDark={isDark}
-                onToggleTheme={toggleTheme}
-              />
+              <NavbarThemeToggle isDark={isDark} onToggleTheme={toggleTheme} />
               <Button className="md:hidden" onClick={toggleMenu}>
                 Menu
               </Button>
@@ -36,9 +33,9 @@ const Navbar = () => {
               </Button>
             </div>
           </div>
-          <NavbarMobile isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
+      <NavbarMobile isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };

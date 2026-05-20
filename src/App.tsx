@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Lenis from "lenis";
+import Mcs from "./pages/Mcs";
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/mcs" element={<Mcs />} />
       </Routes>
     </>
   );

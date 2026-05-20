@@ -6,7 +6,7 @@ const About = () => {
     }, []);
   
   return (
-    <div className="h-[3000px] flex items-center justify-center">
+    <div className="h-[1500px] flex items-center justify-center">
       <h1 className="text-4xl font-bold">About Us</h1>
     </div>
   )

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@base-ui/react": "^1.5.0",
     "@fontsource-variable/geist": "^5.2.9",
     "@tailwindcss/vite": "^4.3.0",
     "@tanstack/react-devtools": "^0.10.5",
@@ -23,6 +24,7 @@
     "lucide-react": "^1.16.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.6",
+    "react-barcode": "^1.6.1",
     "react-dom": "^19.2.6",
     "react-router": "^7.15.1",
     "shadcn": "^4.7.0",
