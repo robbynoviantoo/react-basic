@@ -61,7 +61,7 @@ const ProductTable = ({
               >
                 <div className="flex items-center justify-center gap-2">
                   <LoaderCircle className="size-5 animate-spin" />
-                  <span>Mengambil data mcs...</span>
+                  <span>Mengambil data produk...</span>
                 </div>
               </TableCell>
             </TableRow>

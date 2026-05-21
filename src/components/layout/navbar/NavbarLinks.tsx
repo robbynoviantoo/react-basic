@@ -8,6 +8,12 @@ import {
 } from "@/components/ui/navigation-menu";
 import { NavLink } from "react-router";
 
+const navLinkClassName = ({ isActive }: { isActive: boolean }) =>
+  [
+    "flex items-center gap-2 rounded-lg p-2 text-sm transition-all outline-none hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1",
+    isActive ? "text-foreground" : "text-muted-foreground",
+  ].join(" ");
+
 function ListItem({
   title,
   children,
@@ -33,38 +39,37 @@ const NavbarLinks = () => {
     <NavigationMenu className="hidden md:block">
       <NavigationMenuList className="gap-4">
         <NavigationMenuItem>
-          <NavigationMenuLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-foreground" : "text-muted-foreground"
-              }
-              to="/"
-            >
+          <NavigationMenuLink asChild>
+            <NavLink className={navLinkClassName} to="/">
               Home
             </NavLink>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-foreground" : "text-muted-foreground"
-              }
-              to="/about"
-            >
+          <NavigationMenuLink asChild>
+            <NavLink className={navLinkClassName} to="/about">
               About
             </NavLink>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-foreground" : "text-muted-foreground"
-              }
-              to="/mcs"
-            >
+          <NavigationMenuLink asChild>
+            <NavLink className={navLinkClassName} to="/mcs">
               MCS
+            </NavLink>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild>
+            <NavLink className={navLinkClassName} to="/products">
+              Products
+            </NavLink>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild>
+            <NavLink className={navLinkClassName} to="/dummy-json">
+              DummyJSON
             </NavLink>
           </NavigationMenuLink>
         </NavigationMenuItem>

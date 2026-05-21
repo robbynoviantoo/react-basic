@@ -1,11 +1,11 @@
 export type Product = {
-    id: string
+    id: number
     title: string
     price: number
     stock: number
     category: string
     description: string
-    image: string
+    thumbnail: string
 }
 
 export type ProductResponse = {
@@ -20,3 +20,9 @@ export type ProductParams = {
     skip?: number
     q?: string
 }
+
+export type ProductStockFilter = "all" | "in-stock" | "low-stock" | "out-of-stock"
+
+export type ProductSortField = "title" | "price" | "stock" | "category"
+
+export type ProductSortOrder = "asc" | "desc"

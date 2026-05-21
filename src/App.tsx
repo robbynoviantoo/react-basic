@@ -8,6 +8,7 @@ import Lenis from "lenis";
 import Mcs from "./pages/mcs/Mcs";
 import McsDetail from "./pages/mcs/McsDetail";
 import Products from "./pages/products/Products";
+import DummyJsonPage from "./features/dummyjson/pages/DummyJsonPage";
 
 function App() {
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/dummy-json" element={<DummyJsonPage />} />
         <Route path="/mcs" element={<Mcs />} />
         <Route path="/mcs/:id" element={<McsDetail />} />
       </Routes>
